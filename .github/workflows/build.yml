@@ -1,0 +1,49 @@
+name: SonarCloud
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build:
+    name: Build and analyze
+    runs-on: ubuntu-latest
+    env:
+      BUILD_WRAPPER_OUT_DIR: build_wrapper_output_directory
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install sonar-scanner and build-wrapper
+        uses: SonarSource/sonarcloud-github-c-cpp@v3
+      - name: Run build-wrapper
+        run: |
+          build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} <insert_your_clean_build_command>
+      - name: Run sonar-scanner
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  docker-build-push:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+      - name: Disable CI warnings
+        run: |
+          echo "CI=false" >> $GITHUB_ENV
+      - name: Log in to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+      - name: Build Docker Image
+        run: |
+          docker build -t alelyquispe/utility_pay:$GITHUB_SHA .
+      - name: Push Docker Image to Docker Hub
+        run: |
+          docker push alelyquispe/utility_pay:$GITHUB_SHA
