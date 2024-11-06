@@ -30,3 +30,4 @@ EXPOSE 80
 
 # Comando para ejecutar Nginx
 CMD ["nginx", "-g", "daemon off;"]
+
