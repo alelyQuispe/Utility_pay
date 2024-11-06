@@ -6,18 +6,18 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
-  build:
-    name: Build and analyze
+  sonarcloud:
+    name: SonarCloud Analysis
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out code
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Install sonar-scanner and build-wrapper
-        uses: SonarSource/sonarcloud-github-c-cpp@v3
-        
-      - name: Run sonar-scanner
+          fetch-depth: 0  # Asegúrate de obtener todo el historial de commits
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -25,7 +25,7 @@ jobs:
   docker-build-push:
     name: Build and Push Docker Image
     runs-on: ubuntu-latest
-    needs: build
+    needs: sonarcloud 
     steps:
       - name: Check out code
         uses: actions/checkout@v4
