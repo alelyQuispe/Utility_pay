@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,8 +14,6 @@ export class LoginComponent {
   isRequestPending: boolean = false; // Controla las solicitudes pendientes
   isDarkMode: boolean = false;
 
-  @ViewChild('metamaskLogo') metamaskLogo!: ElementRef;
-
   constructor(private router: Router) {
     this.loadDarkModePreference();
     this.checkMetaMaskConnection();
@@ -23,9 +21,9 @@ export class LoginComponent {
 
   @HostListener('document:mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
-    if (this.metamaskLogo) {
-      const logoElement = this.metamaskLogo.nativeElement as HTMLElement;
+    const logoElement = document.getElementById('logo-container') as HTMLElement;
 
+    if (logoElement) {
       // Obtener el centro del contenedor del logo
       const rect = logoElement.getBoundingClientRect();
       const logoCenterX = rect.left + rect.width / 2;

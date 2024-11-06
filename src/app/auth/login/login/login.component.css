@@ -1,0 +1,16 @@
+#logo-container {
+    perspective: 800px;
+  }
+  
+  .logo-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.5s, box-shadow 0.5s, filter 0.5s;
+    filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.4));
+    border-radius: 10%;
+  }
+  
+  #logo-container:hover .logo-3d {
+    transform: rotateY(25deg) rotateX(10deg) scale(1.1);
+    filter: drop-shadow(0 15px 15px rgba(0, 0, 0, 0.6)) brightness(1.2);
+  }
+  

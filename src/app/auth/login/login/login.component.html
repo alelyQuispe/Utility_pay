@@ -58,23 +58,25 @@
     </ng-template>
   </button>
 
-  <!-- Contenedor del logo MetaMask -->
-  <div class="w-full max-w-sm p-6 relative">
-    <div
-      class="bg-white dark:bg-gray-800 w-full p-6 rounded-xl shadow-xl transition duration-300 transform hover:scale-105"
-    >
+   <!-- Contenedor del logo MetaMask en 3D -->
+   <div class="w-full max-w-sm p-6 relative">
+    <div class="bg-white dark:bg-gray-800 w-full p-6 rounded-xl shadow-xl">
       <h2
         class="text-[#BB2525] dark:text-gray-200 text-3xl font-bold mb-6 text-center relative flex items-center justify-center"
       >
         Ingresar a UPay
         <div
           id="logo-container"
-          class="absolute ml-4 transition-transform duration-300"
-          #metamaskLogo
+          class="ml-4 w-20 h-20 relative transform transition-transform"
         >
-          <!-- Aquí se mostrará el logo en 3D -->
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg"
+            alt="MetaMask Logo"
+            class="absolute inset-0 logo-3d w-full h-full pointer-events-none"
+          />
         </div>
       </h2>
+
       <div class="space-y-3">
         <!-- Botón para conectar MetaMask -->
         <button
@@ -160,71 +162,24 @@
     </div>
   </div>
 </div>
-
-<!-- Script del logo MetaMask en 3D -->
 <script>
-  (function () {
-    function e(t, n, r) {
-      function s(o, u) {
-        if (!n[o]) {
-          if (!t[o]) {
-            var a = typeof require == "function" && require;
-            if (!u && a) return a(o, !0);
-            if (i) return i(o, !0);
-            var f = new Error("Cannot find module '" + o + "'");
-            throw (f.code = "MODULE_NOT_FOUND"), f;
-          }
-          var l = (n[o] = { exports: {} });
-          t[o][0].call(
-            l.exports,
-            function (e) {
-              var n = t[o][1][e];
-              return s(n ? n : e);
-            },
-            l,
-            l.exports,
-            e,
-            t,
-            n,
-            r
-          );
+  document.addEventListener("DOMContentLoaded", () => {
+    const logoContainer = document.getElementById("logo-container");
+
+    if (logoContainer) {
+      document.addEventListener("mousemove", (e) => {
+        const rect = logoContainer.getBoundingClientRect();
+        const offsetX = e.clientX - (rect.left + rect.width / 2);
+        const offsetY = e.clientY - (rect.top + rect.height / 2);
+
+        const rotateX = (offsetY / rect.height) * 15;
+        const rotateY = -(offsetX / rect.width) * 15;
+
+        const logo = logoContainer.querySelector(".logo-3d");
+        if (logo) {
+          logo.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.1)`;
         }
-        return n[o].exports;
-      }
-      var i = typeof require == "function" && require;
-      for (var o = 0; o < r.length; o++) s(r[o]);
-      return s;
+      });
     }
-    return e;
-  })()({
-    1: [
-      function (a, b, c) {
-        var d = a("../index"),
-          viewer = d({
-            width: 0.4,
-            height: 0.4,
-            followMouse: !0,
-            followMotion: !0,
-          });
-        document.getElementById("logo-container").appendChild(viewer.container);
-      },
-      { "../index": 3 },
-    ],
-    2: [
-      function (a, b, c) {
-        b.exports = {
-          positions: [
-            [111.0246, 52.6046, 46.2259],
-            [114.025, 87.6733, 58.9818],
-          ],
-        };
-      },
-      {},
-    ],
-    3: [
-      function (a, b, c) {
-      },
-      {},
-    ],
   });
 </script>
