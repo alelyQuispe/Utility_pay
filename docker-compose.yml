@@ -3,8 +3,8 @@ version: '3.8'
 services:
   app:
     build:
-      contexts: .
+      context: .
       dockerfile: Dockerfile
     image: alelyquispe/utility_pay:latest
     ports:
-      - "4200:4200"
+      - "80:80"
