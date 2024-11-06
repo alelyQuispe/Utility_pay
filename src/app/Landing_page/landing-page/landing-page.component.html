@@ -1,0 +1,263 @@
+<div class="m-0 p-0 min-h-screen flex flex-col">
+  <div class="bg-gradient-to-b from-[#B43F3F] to-[#B43F3F] dark:from-gray-900 dark:to-gray-800 flex-grow flex flex-col items-center pb-10">
+    <!-- Header -->
+    <header class="w-full bg-gradient-to-r from-[#B43F3F] to-[#B43F3F] dark:from-gray-900 dark:to-gray-800 py-4 px-8 flex justify-between items-center border-b border-white shadow-lg dark:border-gray-700">
+      <div class="text-4xl font-bold text-white tracking-widest dark:text-gray-200">
+        {{ mainTitle }}
+      </div>
+      <nav class="flex space-x-6 items-center">
+        <a class="text-white text-lg hover:underline dark:text-gray-200" routerLink="/register">{{ createAccount }}</a>
+        <a class="text-white text-lg hover:underline dark:text-gray-200" href="#">{{ forYou }}</a>
+        <a class="text-white text-lg hover:underline dark:text-gray-200" href="#">{{ resources }}</a>
+        <a class="text-white text-lg hover:underline dark:text-gray-200" href="#">{{ helpCenter }}</a>
+      </nav>
+      <div class="flex items-center space-x-4">
+        <!-- Language Selector -->
+        <select id="languageSelect" (change)="onLanguageChange($event)" class="bg-transparent text-white border border-white rounded px-2 py-1 dark:border-gray-700 dark:text-gray-200">
+          <option value="es">Español</option>
+          <option value="en">English</option>
+        </select>
+
+        <!-- Dark Mode Toggle Button -->
+        <button (click)="toggleDarkMode()" class="text-white flex items-center justify-center w-8 h-8">
+          <svg *ngIf="isDarkMode; else sunIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.485-8.485h-1m-14.97 0h-1m10.607 10.607l-.707-.707M5.636 5.636l-.707-.707m10.607-.707l-.707.707M5.636 18.364l-.707.707M12 5a7 7 0 100 14 7 7 0 000-14z" />
+          </svg>
+          <ng-template #sunIcon>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2a9.956 9.956 0 00-7.071 2.929C3.516 6.342 2 8.671 2 11.343s1.516 5.001 2.929 6.414A9.956 9.956 0 0012 21.657a9.956 9.956 0 007.071-2.929C20.485 16.345 22 14.016 22 11.343S20.485 6.342 19.071 4.929A9.956 9.956 0 0012 2z" />
+            </svg>
+          </ng-template>
+        </button>
+        <!-- Login Button -->
+        <button class="border border-white text-white py-1.5 px-5 rounded-full hover:bg-white hover:text-[#B43F3F] transition duration-300 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-200 dark:hover:text-[#B43F3F]" routerLink="/login">
+          {{ login }}
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Section -->
+    <div class="flex flex-col items-center mt-10">
+      <h1 class="text-8xl font-extrabold tracking-tight leading-tight hover:scale-105 transition-transform duration-500 text-white dark:text-gray-100">
+        {{ mainTitle }}
+      </h1>
+      <p class="mt-2 text-2xl font-light tracking-wide text-white dark:text-gray-300">
+        {{ mainSubtitle }}
+      </p>
+      <div class="relative w-3/4 max-w-lg">
+        <input
+          type="text"
+          [placeholder]="inputPlaceholder"
+          class="w-full py-4 pl-10 pr-4 border rounded-full text-lg"
+        />
+        <svg
+          class="absolute left-4 top-1/2 transform -translate-y-1/2 h-6 w-6 text-gray-400"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M12.9 14.32a8 8 0 111.414-1.414l4.284 4.284a1 1 0 01-1.414 1.414l-4.284-4.284zM8 14A6 6 0 108 2a6 6 0 000 12z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </div>
+      <div class="text-center mt-4">
+        <p class="text-gray-100 text-sm">
+          {{ mainDescription }}
+        </p>
+      </div>
+    </div>    
+  </div>
+
+  <!-- Services Section -->
+  <section class="w-full bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 py-16 px-4 shadow-lg">
+    <h2 class="text-center text-4xl font-semibold mb-6 dark:text-gray-100">
+      {{ servicesTitle }}
+    </h2>
+    <p class="text-center text-gray-500 dark:text-gray-300 mb-8 text-lg">
+      {{ servicesSubtitle }}
+    </p>
+    <div class="relative">
+      <div id="cardCarousel" class="flex overflow-x-auto space-x-4 scroll-smooth">
+        <!-- Service Cards -->
+        <div class="min-w-[200px] bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg p-6 h-36 flex flex-col items-center justify-center shadow-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-transform transform hover:scale-105 cursor-pointer">
+          <span class="material-icons text-4xl mb-2">lightbulb</span>
+          <span class="text-lg font-semibold">Servicios de Luz</span>
+        </div>
+        <div class="min-w-[200px] bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg p-6 h-36 flex flex-col items-center justify-center shadow-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-transform transform hover:scale-105 cursor-pointer">
+          <span class="material-icons text-4xl mb-2">water_drop</span>
+          <span class="text-lg font-semibold">Servicios de Agua</span>
+        </div>
+        <div class="min-w-[200px] bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg p-6 h-36 flex flex-col items-center justify-center shadow-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-transform transform hover:scale-105 cursor-pointer">
+          <span class="material-icons text-4xl mb-2">wifi</span>
+          <span class="text-lg font-semibold">Telecomunicaciones</span>
+        </div>
+        <div class="min-w-[200px] bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg p-6 h-36 flex flex-col items-center justify-center shadow-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-transform transform hover:scale-105 cursor-pointer">
+          <span class="material-icons text-4xl mb-2">local_gas_station</span>
+          <span class="text-lg font-semibold">Servicios de Gas</span>
+        </div>
+        <div class="min-w-[200px] bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg p-6 h-36 flex flex-col items-center justify-center shadow-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-transform transform hover:scale-105 cursor-pointer">
+          <span class="material-icons text-4xl mb-2">receipt</span>
+          <span class="text-lg font-semibold">Trámites y Tributos</span>
+        </div>
+        <div class="min-w-[200px] bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg p-6 h-36 flex flex-col items-center justify-center shadow-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-transform transform hover:scale-105 cursor-pointer">
+          <span class="material-icons text-4xl mb-2">business</span>
+          <span class="text-lg font-semibold">Proveedores de negocio</span>
+        </div>
+        <div class="min-w-[200px] bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg p-6 h-36 flex flex-col items-center justify-center shadow-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-transform transform hover:scale-105 cursor-pointer">
+          <span class="material-icons text-4xl mb-2">account_balance</span>
+          <span class="text-lg font-semibold">Financieras</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why UPay Section -->
+<section class="w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 py-12 px-4 shadow-lg">
+  <!-- Título de la sección -->
+  <h2 class="text-center text-3xl font-semibold mb-6">
+    {{ whyUPayTitle }}
+  </h2>
+  
+  <!-- Descripción de la sección -->
+  <p class="text-center text-gray-500 dark:text-gray-300 mb-8 text-lg">
+    {{ whyUPayDescription }}
+  </p>
+  
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center max-w-6xl mx-auto">
+    <!-- Primera columna con las características -->
+    <div class="flex flex-col space-y-6">
+      <div class="flex items-center space-x-4 bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md">
+        <div class="bg-purple-100 dark:bg-purple-700 p-2 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-purple-500 dark:text-purple-300" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M5 8c0-1.66 1.34-3 3-3h8c1.66 0 3 1.34 3 3v6c0 1.66-1.34 3-3 3H8c-1.66 0-3-1.34-3-3V8zm8 10.5V21h2v-2.5H9v2H7v-2.5H5v2c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-2h-2v2.5h-2v-2.5h-2z"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-purple-600 dark:text-purple-400">{{ featureFreeTitle }}</h3>
+          <p class="text-gray-500 dark:text-gray-300 text-sm">{{ featureFreeDescription }}</p>
+        </div>
+      </div>
+      
+      <div class="flex items-center space-x-4 bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md">
+        <div class="bg-purple-100 dark:bg-purple-700 p-2 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-purple-500 dark:text-purple-300" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3 12c0-2.75 1.5-5.25 3.5-6.75V3a.75.75 0 0 1 1.5 0v1.25c0 .41-.34.75-.75.75H5.25c-.41 0-.75-.34-.75-.75S4.84 3 5.25 3h6.75c.41 0 .75.34.75.75v6h-3.5v-3a.75.75 0 0 1 1.5 0v3.5H15v-5c0-.41.34-.75.75-.75h2a.75.75 0 0 1 0 1.5h-2v4c0 .41-.34.75-.75.75h-2v3H18a1.5 1.5 0 0 1 0 3H6.5a1.5 1.5 0 0 1 0-3h2.5v-3h-.75v4H8v2h1.5v-1.5H15v1.5H9.5v2H10a1.5 1.5 0 0 1 1.5-1.5v1.5H14V20H12V19a1.5 1.5 0 0 1 1.5-1.5h3.5v1.5h-2v3H15V20H18v-2.5h-4v-2.5h-2.5V12z"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-purple-600 dark:text-purple-400">{{ featureSafeTitle }}</h3>
+          <p class="text-gray-500 dark:text-gray-300 text-sm">{{ featureSafeDescription }}</p>
+        </div>
+      </div>
+      
+      <div class="flex items-center space-x-4 bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md">
+        <div class="bg-purple-100 dark:bg-purple-700 p-2 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-purple-500 dark:text-purple-300" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M15 3c-3.09 0-6 1.95-6 5.33v.34H9v4h2v-1.5h.5v-1.25h1v-1.75H12v-2.5a1.5 1.5 0 0 1 3 0V7h-1.5v1.5H14v2.5H16v.75h-2V12h.5v1h-1v1.75h3v-2.5h.5v.25H20V9h-2v2h.5v1h.5v1h-1v-1.5H15v2h-2V8.67c0-3.17 1.67-5.67 4-5.67H15z"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-purple-600 dark:text-purple-400">{{ featureFastTitle }}</h3>
+          <p class="text-gray-500 dark:text-gray-300 text-sm">{{ featureFastDescription }}</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Imagen ilustrativa -->
+    <div class="flex justify-center">
+      <img src="assets/img/servicios.png" alt="{{ servicesImageAlt }}" class="w-80 h-auto" />
+    </div>
+
+    <!-- Segunda columna con las características -->
+    <div class="flex flex-col space-y-6">
+      <div class="flex items-center space-x-4 bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md">
+        <div class="bg-purple-100 dark:bg-purple-700 p-2 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-purple-500 dark:text-purple-300" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M10.5 15c0-1.1.9-2 2-2s2 .9 2 2H19V9h1.5V7h-1V3.5H5v3.5H3.5v2H5v6h7V9a.5.5 0 0 1 1 0v6zM5 5v1.5h14V5h-14zm-2 7H19v2H4.5c-.83 0-1.5.67-1.5 1.5S3.67 17 4.5 17h7c.83 0 1.5-.67 1.5-1.5H7a.5.5 0 0 0 0-1h5.5V9h1V7H13a.5.5 0 0 0 0-1H7v1.5H5v6H4a.5.5 0 0 0 0 1H2v1.5z"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-purple-600 dark:text-purple-400">{{ featureOnlineTitle }}</h3>
+          <p class="text-gray-500 dark:text-gray-300 text-sm">{{ featureOnlineDescription }}</p>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-4 bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md">
+        <div class="bg-purple-100 dark:bg-purple-700 p-2 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-purple-500 dark:text-purple-300" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 6.5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zm0 8.5h-6V9h-2v6H5.414l1.293-1.293a1 1 0 10-1.414-1.414L2 15l3.293 3.293a1 1 0 001.414-1.414L5.414 17H19a1 1 0 001-1v-1a1 1 0 00-1-1z"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-purple-600 dark:text-purple-400">Atención al Cliente</h3>
+          <p class="text-gray-500 dark:text-gray-300 text-sm">Disponibilidad de atención personalizada para ayudarte con tus pagos cuando lo necesites.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <section class="w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 py-12 px-4 shadow-lg">
+    <h2 class="text-center text-3xl font-semibold mb-6">{{ ourTeamTitle }}</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <!-- Team Members -->
+      <div class="flex flex-col items-center space-y-4">
+        <img src="assets/img/pasos.png" alt="{{ member1Alt }}" class="rounded-full w-40 h-40 object-cover" />
+        <h3 class="text-xl font-semibold">{{ member1Name }}</h3>
+        <p class="text-gray-500 dark:text-gray-300">{{ member1Role }}</p>
+      </div>
+      <div class="flex flex-col items-center space-y-4">
+        <img src="assets/img/foto_perfil.png" alt="{{ member2Alt }}" class="rounded-full w-40 h-40 object-cover" />
+        <h3 class="text-xl font-semibold">{{ member2Name }}</h3>
+        <p class="text-gray-500 dark:text-gray-300">{{ member2Role }}</p>
+      </div>
+      <div class="flex flex-col items-center space-y-4">
+        <img src="assets/img/pasos.png" alt="{{ member3Alt }}" class="rounded-full w-40 h-40 object-cover" />
+        <h3 class="text-xl font-semibold">{{ member3Name }}</h3>
+        <p class="text-gray-500 dark:text-gray-300">{{ member3Role }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="w-full bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 py-12 px-4 shadow-lg">
+    <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div class="space-y-4">
+        <h2 class="text-3xl font-semibold">{{ faqTitle }} <span class="text-blue-500 dark:text-blue-400">{{ faqHighlight }}</span></h2>
+        <p class="text-gray-500 dark:text-gray-300 mb-4">{{ faqDescription }}</p>
+        <button class="bg-blue-500 dark:bg-blue-700 text-white py-3 px-6 rounded-lg hover:bg-blue-600 dark:hover:bg-blue-600 transition duration-300 shadow-lg">
+          {{ faqButton }}
+        </button>
+      </div>
+      <div class="space-y-4">
+        <!-- FAQ Questions -->
+        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md">
+          <div class="py-4 px-6 border-b cursor-pointer flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-600">
+            <p class="font-medium text-gray-700 dark:text-gray-300">{{ faq1Question }}</p>
+            <span class="text-gray-500 dark:text-gray-400">></span>
+          </div>
+        </div>
+        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md">
+          <div class="py-4 px-6 border-b cursor-pointer flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-600">
+            <p class="font-medium text-gray-700 dark:text-gray-300">{{ faq2Question }}</p>
+            <span class="text-gray-500 dark:text-gray-400">></span>
+          </div>
+        </div>
+        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md">
+          <div class="py-4 px-6 cursor-pointer flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-600">
+            <p class="font-medium text-gray-700 dark:text-gray-300">{{ faq3Question }}</p>
+            <span class="text-gray-500 dark:text-gray-400">></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="w-full bg-[#B43F3F] dark:bg-gray-900 text-center py-4">
+    <p class="text-white dark:text-gray-300">{{ footerText }}</p>
+  </footer>
+</div>
