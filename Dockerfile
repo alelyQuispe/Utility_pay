@@ -23,7 +23,7 @@ RUN npm run build --prod
 FROM nginx:alpine AS production
 
 # Copiar los archivos de build al servidor Nginx
-COPY --from=build /app/dist/utility-pay /usr/share/nginx/html
+COPY --from=build /app/dist/t08-utility-pay /usr/share/nginx/html
 
 # Exponer el puerto en el que corre la aplicación
 EXPOSE 80
